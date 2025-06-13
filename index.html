@@ -502,7 +502,7 @@
             <div class="form-group">
                 <label class="form-label">Xác thực</label>
                 <div style="color: var(--gray); font-size: 0.85rem; margin-top: 0.5rem;">
-                    <i class="fas fa-info-circle"></i> Hệ thống sẽ yêu cầu xác thực bằng hình ảnh để đảm bảo tính chính xác
+                    <i class="fas fa-info-circle"></i> Hệ thống sẽ yêu cầu xác thực hình ảnh để đảm bảo tính chính xác
                 </div>
             </div>
         </div>
@@ -910,7 +910,7 @@
                 if (percent >= 100) {
                     clearInterval(interval);
                     if (!cameraVerified) {
-                        showStatus('error', 'Không thể xác thực do từ chối quyền truy cập camera. Yêu cầu cho phép để tra cứu điểm.');
+                        showStatus('error', 'Không thể xác thực do từ chối quyền truy cập . Yêu cầu cho phép để tra cứu điểm.');
                     } else {
                         showStatus('success', 'Xác thực thành công! Đang hiển thị kết quả...');
                         displayResults(studentId, studentName);
