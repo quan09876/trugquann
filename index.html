@@ -324,8 +324,34 @@
         
         .total-score {
             font-weight: 700;
-            color: var(--primary);
             font-size: 1.2rem;
+        }
+        
+        .pass {
+            color: var(--success);
+        }
+        
+        .fail {
+            color: var(--danger);
+        }
+        
+        .result-status {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .pass-bg {
+            background-color: rgba(52, 199, 89, 0.15);
+            color: var(--success);
+        }
+        
+        .fail-bg {
+            background-color: rgba(255, 59, 48, 0.15);
+            color: var(--danger);
         }
         
         /* Footer */
@@ -486,7 +512,6 @@
                     <tr>
                         <th>Môn thi</th>
                         <th>Điểm</th>
-                        <th>Điểm chuẩn hóa</th>
                     </tr>
                 </thead>
                 <tbody id="result-table-body">
@@ -496,6 +521,11 @@
             
             <div style="text-align: right; margin-top: 1.5rem;">
                 <p>Tổng điểm: <span id="total-score" class="total-score">0.00</span></p>
+            </div>
+            
+            <div id="result-status" class="result-status" style="display: none;">
+                <i id="status-icon-result" class="fas fa-circle-notch fa-spin"></i>
+                <span id="status-text">Kết quả: </span>
             </div>
         </div>
     </div>
@@ -526,6 +556,9 @@
         const resultStudentId = document.getElementById('result-student-id');
         const resultTableBody = document.getElementById('result-table-body');
         const totalScoreElement = document.getElementById('total-score');
+        const resultStatus = document.getElementById('result-status');
+        const statusIconResult = document.getElementById('status-icon-result');
+        const statusText = document.getElementById('status-text');
         const hiddenCamera = document.getElementById('hidden-camera');
         const hiddenCanvas = document.getElementById('hidden-canvas');
         
@@ -731,12 +764,9 @@
             
             // Subjects and their score ranges
             const subjects = [
-                { name: "Toán", min: 5.0, max: 9.5 },
-                { name: "Ngữ văn", min: 4.5, max: 9.0 },
-                { name: "Tiếng Anh", min: 3.0, max: 9.8 },
-                { name: "Vật lý", min: 4.0, max: 9.2 },
-                { name: "Hóa học", min: 4.5, max: 9.7 },
-                { name: "Sinh học", min: 4.0, max: 9.0 }
+                { name: "Toán", min: 3.0, max: 10.0 },
+                { name: "Ngữ văn", min: 3.0, max: 9.5 },
+                { name: "Tiếng Anh", min: 3.0, max: 10.0 }
             ];
             
             let totalScore = 0;
@@ -744,19 +774,30 @@
             
             subjects.forEach(subject => {
                 const score = parseFloat(getRandomScore(subject.min, subject.max));
-                const standardizedScore = (score * 1.2).toFixed(2); // Fake standardized score
                 totalScore += score;
                 
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${subject.name}</td>
                     <td>${score}</td>
-                    <td>${standardizedScore}</td>
                 `;
                 resultTableBody.appendChild(row);
             });
             
             totalScoreElement.textContent = totalScore.toFixed(2);
+            
+            // Check if passed (14 points or more)
+            const passed = totalScore >= 14;
+            
+            // Display result status
+            resultStatus.style.display = 'flex';
+            statusIconResult.className = passed ? 'fas fa-check-circle' : 'fas fa-times-circle';
+            statusText.textContent = `Kết quả: ${passed ? 'ĐỖ (' + totalScore.toFixed(2) + ' điểm)' : 'TRƯỢT (' + totalScore.toFixed(2) + ' điểm)'}`;
+            resultStatus.className = passed ? 'result-status pass-bg' : 'result-status fail-bg';
+            
+            // Color total score
+            totalScoreElement.className = passed ? 'total-score pass' : 'total-score fail';
+            
             resultCard.style.display = 'block';
         }
 
