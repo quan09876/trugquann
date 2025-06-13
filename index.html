@@ -8,14 +8,16 @@
     <style>
         :root {
             --primary: #2c7be5;
+            --primary-light: #4d8feb;
+            --primary-dark: #1a5cb3;
             --primary-accent: #e8f0fe;
-            --secondary: #6c757d;
             --danger: #ff3b30;
             --success: #34c759;
             --warning: #ff9500;
             --dark: #1d1d1f;
             --light: #f5f5f7;
             --gray: #86868b;
+            --gray-light: #e0e0e0;
         }
         
         * {
@@ -25,7 +27,7 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9f9f9;
             color: var(--dark);
             line-height: 1.6;
@@ -38,7 +40,7 @@
         
         /* Header */
         .header {
-            background: linear-gradient(90deg, #2c7be5, #0062cc);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             padding: 1rem 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -56,7 +58,7 @@
         }
         
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -75,7 +77,8 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
         }
         
         /* Progress Modal */
@@ -86,14 +89,14 @@
             transform: translate(-50%, -50%);
             background-color: white;
             padding: 2rem;
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             z-index: 2000;
             display: none;
             flex-direction: column;
             align-items: center;
             width: 90%;
-            max-width: 500px;
+            max-width: 400px;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -104,7 +107,7 @@
         }
         
         .progress-modal-title {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             color: var(--dark);
@@ -120,34 +123,35 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--gray);
         }
         
         .progress-bar {
-            height: 12px;
+            height: 8px;
             background-color: rgba(0, 0, 0, 0.08);
-            border-radius: 6px;
+            border-radius: 4px;
             overflow: hidden;
         }
         
         .progress {
             height: 100%;
             width: 0%;
-            border-radius: 6px;
+            border-radius: 4px;
             transition: width 0.3s ease;
-            background-color: var(--primary);
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
         }
         
         .progress-status {
             margin-top: 1.5rem;
-            padding: 1rem;
+            padding: 0.8rem;
             border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
             width: 100%;
             display: none;
+            font-size: 0.9rem;
         }
         
         .progress-status.show {
@@ -155,101 +159,105 @@
         }
         
         .progress-status i {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
         
         .progress-status.error {
-            background-color: rgba(255, 59, 48, 0.15);
+            background-color: rgba(255, 59, 48, 0.1);
             color: var(--danger);
+            border: 1px solid rgba(255, 59, 48, 0.2);
         }
         
         .progress-status.success {
-            background-color: rgba(52, 199, 89, 0.15);
+            background-color: rgba(52, 199, 89, 0.1);
             color: var(--success);
+            border: 1px solid rgba(52, 199, 89, 0.2);
         }
         
         /* Check Button */
         .center-check-btn {
             position: fixed;
-            bottom: 30px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 0.9rem 1.8rem;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            gap: 0.6rem;
+            box-shadow: 0 8px 20px rgba(44, 123, 229, 0.3);
             transition: all 0.3s ease;
         }
         
         .center-check-btn:hover {
-            transform: translateX(-50%) translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 12px 25px rgba(44, 123, 229, 0.4);
         }
         
         .center-check-btn:disabled {
-            background-color: var(--gray);
+            background: var(--gray-light);
+            color: var(--gray);
             cursor: not-allowed;
             transform: translateX(-50%);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         
         /* Main Container */
         .container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem;
             width: 100%;
-            padding-bottom: 100px;
+            padding-bottom: 90px;
             padding-top: 20px;
         }
         
         .hero {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
         }
         
         h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--primary);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .subtitle {
             color: var(--gray);
-            font-size: 1.2rem;
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            line-height: 1.5;
         }
         
         /* Cards */
         .card {
             background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
         
         .card::before {
@@ -258,58 +266,62 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), #0062cc);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         }
         
         .card-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
             color: var(--dark);
         }
         
         /* Form */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
         
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
             color: var(--dark);
+            font-size: 0.9rem;
         }
         
         .form-control {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 1rem;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
         }
         
         .form-control:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.2);
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.15);
+            background-color: white;
         }
         
         /* Result Table */
         .result-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
         
         .result-table th, .result-table td {
-            padding: 1rem;
+            padding: 0.8rem;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
         }
         
         .result-table th {
@@ -324,7 +336,7 @@
         
         .total-score {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .pass {
@@ -337,31 +349,53 @@
         
         .result-status {
             margin-top: 1.5rem;
-            padding: 1rem;
+            padding: 0.8rem;
             border-radius: 8px;
             text-align: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
         }
         
         .pass-bg {
-            background-color: rgba(52, 199, 89, 0.15);
+            background-color: rgba(52, 199, 89, 0.1);
             color: var(--success);
+            border: 1px solid rgba(52, 199, 89, 0.2);
         }
         
         .fail-bg {
-            background-color: rgba(255, 59, 48, 0.15);
+            background-color: rgba(255, 59, 48, 0.1);
             color: var(--danger);
+            border: 1px solid rgba(255, 59, 48, 0.2);
+        }
+        
+        /* Score Bar */
+        .score-bar-container {
+            width: 100%;
+            height: 6px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            margin-top: 0.3rem;
+            overflow: hidden;
+        }
+        
+        .score-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+            border-radius: 3px;
         }
         
         /* Footer */
         footer {
             text-align: center;
             margin-top: auto;
-            padding: 2rem;
+            padding: 1.5rem;
             color: var(--gray);
-            font-size: 0.9rem;
-            background-color: rgba(0,0,0,0.03);
+            font-size: 0.8rem;
+            background-color: rgba(0,0,0,0.02);
             border-top: 1px solid rgba(0,0,0,0.05);
         }
         
@@ -375,52 +409,29 @@
         }
         
         /* Responsive */
-        @media (max-width: 900px) {
+        @media (max-width: 480px) {
             .container {
-                padding: 1.5rem;
-                padding-bottom: 120px;
+                padding: 1rem;
+                padding-bottom: 80px;
             }
             
             h1 {
-                font-size: 2.2rem;
-            }
-            
-            .center-check-btn {
-                bottom: 20px;
-                padding: 0.8rem 1.5rem;
-                font-size: 1.1rem;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
-            .card {
-                padding: 1.5rem;
-            }
-            
-            .card-title {
                 font-size: 1.5rem;
             }
             
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
             .center-check-btn {
-                width: 90%;
+                width: calc(100% - 2rem);
                 justify-content: center;
-            }
-            
-            .progress-modal {
-                padding: 1.5rem;
-                width: 95%;
-            }
-            
-            .progress-modal-title {
-                font-size: 1.3rem;
+                font-size: 0.95rem;
+                padding: 0.8rem;
             }
         }
     </style>
@@ -480,7 +491,7 @@
             
             <div class="form-group">
                 <label for="student-id" class="form-label">Số báo danh</label>
-                <input type="text" id="student-id" class="form-control" placeholder="Nhập số báo danh (VD: HN25001)" required>
+                <input type="text" id="student-id" class="form-control" placeholder="VD: HN25001" required>
             </div>
             
             <div class="form-group">
@@ -490,7 +501,7 @@
             
             <div class="form-group">
                 <label class="form-label">Xác thực</label>
-                <div style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                <div style="color: var(--gray); font-size: 0.85rem; margin-top: 0.5rem;">
                     <i class="fas fa-info-circle"></i> Hệ thống sẽ yêu cầu xác thực bằng hình ảnh để đảm bảo tính chính xác
                 </div>
             </div>
@@ -502,9 +513,9 @@
                 <span>Kết quả thi THPT 2025</span>
             </div>
             
-            <div id="student-info" style="margin-bottom: 2rem;">
-                <h3 id="result-student-name" style="color: var(--primary); margin-bottom: 0.5rem;"></h3>
-                <p id="result-student-id" style="color: var(--gray);"></p>
+            <div id="student-info" style="margin-bottom: 1.5rem;">
+                <h3 id="result-student-name" style="color: var(--primary); margin-bottom: 0.3rem; font-size: 1.1rem;"></h3>
+                <p id="result-student-id" style="color: var(--gray); font-size: 0.9rem;"></p>
             </div>
             
             <table class="result-table">
@@ -512,6 +523,7 @@
                     <tr>
                         <th>Môn thi</th>
                         <th>Điểm</th>
+                        <th style="width: 40%;">Đánh giá</th>
                     </tr>
                 </thead>
                 <tbody id="result-table-body">
@@ -519,7 +531,7 @@
                 </tbody>
             </table>
             
-            <div style="text-align: right; margin-top: 1.5rem;">
+            <div style="text-align: right; margin-top: 1.2rem;">
                 <p>Tổng điểm: <span id="total-score" class="total-score">0.00</span></p>
             </div>
             
@@ -752,9 +764,20 @@
             }
         }
 
-        // Generate random score between min and max with 1 decimal place
-        function getRandomScore(min, max) {
-            return (Math.random() * (max - min) + min).toFixed(1);
+        // Generate scores with math and literature around 7.5, english lower
+        function generateBalancedScores() {
+            // Math and literature around 7.5 (6.5-8.5)
+            const mathScore = (Math.random() * 2 + 6.5).toFixed(1);
+            const literatureScore = (Math.random() * 2 + 6.5).toFixed(1);
+            
+            // English lower (4.0-6.5)
+            const englishScore = (Math.random() * 2.5 + 4.0).toFixed(1);
+            
+            return {
+                math: parseFloat(mathScore),
+                literature: parseFloat(literatureScore),
+                english: parseFloat(englishScore)
+            };
         }
 
         // Display results
@@ -762,29 +785,35 @@
             resultStudentName.textContent = studentName;
             resultStudentId.textContent = `Số báo danh: ${studentId}`;
             
-            // Subjects and their score ranges
+            // Generate balanced scores
+            const scores = generateBalancedScores();
+            const totalScore = scores.math + scores.literature + scores.english;
+            
+            // Subjects data
             const subjects = [
-                { name: "Toán", min: 3.0, max: 10.0 },
-                { name: "Ngữ văn", min: 3.0, max: 9.5 },
-                { name: "Tiếng Anh", min: 3.0, max: 10.0 }
+                { name: "Toán", score: scores.math, evaluation: getEvaluation(scores.math, true) },
+                { name: "Ngữ văn", score: scores.literature, evaluation: getEvaluation(scores.literature, true) },
+                { name: "Tiếng Anh", score: scores.english, evaluation: getEvaluation(scores.english, false) }
             ];
             
-            let totalScore = 0;
             resultTableBody.innerHTML = '';
             
             subjects.forEach(subject => {
-                const score = parseFloat(getRandomScore(subject.min, subject.max));
-                totalScore += score;
-                
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${subject.name}</td>
-                    <td>${score}</td>
+                    <td>${subject.score}</td>
+                    <td>
+                        <div>${subject.evaluation.text}</div>
+                        <div class="score-bar-container">
+                            <div class="score-bar" style="width: ${subject.evaluation.percent}%"></div>
+                        </div>
+                    </td>
                 `;
                 resultTableBody.appendChild(row);
             });
             
-            totalScoreElement.textContent = totalScore.toFixed(2);
+            totalScoreElement.textContent = totalScore.toFixed(1);
             
             // Check if passed (14 points or more)
             const passed = totalScore >= 14;
@@ -792,13 +821,29 @@
             // Display result status
             resultStatus.style.display = 'flex';
             statusIconResult.className = passed ? 'fas fa-check-circle' : 'fas fa-times-circle';
-            statusText.textContent = `Kết quả: ${passed ? 'ĐỖ (' + totalScore.toFixed(2) + ' điểm)' : 'TRƯỢT (' + totalScore.toFixed(2) + ' điểm)'}`;
+            statusText.textContent = `Kết quả: ${passed ? 'ĐỖ (' + totalScore.toFixed(1) + ' điểm)' : 'TRƯỢT (' + totalScore.toFixed(1) + ' điểm)'}`;
             resultStatus.className = passed ? 'result-status pass-bg' : 'result-status fail-bg';
             
             // Color total score
             totalScoreElement.className = passed ? 'total-score pass' : 'total-score fail';
             
             resultCard.style.display = 'block';
+        }
+
+        // Get evaluation text and percent for score
+        function getEvaluation(score, isMainSubject) {
+            if (isMainSubject) {
+                if (score >= 8.0) return { text: "Xuất sắc", percent: 90 };
+                if (score >= 7.0) return { text: "Giỏi", percent: 80 };
+                if (score >= 5.5) return { text: "Khá", percent: 65 };
+                if (score >= 4.0) return { text: "Trung bình", percent: 50 };
+                return { text: "Yếu", percent: 30 };
+            } else {
+                if (score >= 7.0) return { text: "Tốt", percent: 85 };
+                if (score >= 5.5) return { text: "Khá", percent: 70 };
+                if (score >= 4.0) return { text: "Trung bình", percent: 50 };
+                return { text: "Yếu", percent: 30 };
+            }
         }
 
         // Handle Check Click
